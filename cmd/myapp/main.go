@@ -6,20 +6,19 @@ import (
 	"layout/internal"
 )
 
-const DEFAULT_DISCOUNT = 500
+const DEFAULT_DISCOUNT = 50000
 
 func main() {
-	cust := internal.NewCustomer("Ramzan", 23, 10000, 1000, true)
-	cust.CalcDiscount = func() (int, error) {
-		if !cust.Discount {
+	r := internal.Customer{Name: "Ramzan", Age: 23, Discount: true, Debt: 5000, Balance: 10000}
+	r.CalcDiscount = func() (int, error) {
+		if !r.Discount {
 			return 0, errors.New("Discount not available")
 		}
-		result := DEFAULT_DISCOUNT - cust.Debt
+		result := DEFAULT_DISCOUNT - r.Debt
 		if result < 0 {
 			return 0, nil
 		}
 		return result, nil
 	}
-
-	fmt.Printf("%+v\n", cust)
+	fmt.Println(internal.CalcPrice(r, 500))
 }
