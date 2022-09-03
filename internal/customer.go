@@ -40,7 +40,10 @@ func NewCustomer(name string, age int, balance int, debt int, discount bool) *Cu
 		discount: discount,
 	}
 }
-func CalcPrice(c Customer, sum int) (int, error) {
+
+// измените функцию так, чтобы на вход она теперь принимала объект
+// реализующий интерфейс Discounter
+func CalcPrice(c Discounter, sum int) (int, error) {
 	discount, err := c.CalcDiscount()
 	if err != nil {
 		return 0, err
