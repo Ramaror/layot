@@ -12,6 +12,10 @@ type Customer struct {
 	discount bool
 }
 
+type Overduer struct {
+	*Customer
+}
+
 func (c *Customer) CalcDiscount() (int, error) {
 	if !c.discount {
 		return 0, errors.New("Discount not available")
